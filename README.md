@@ -21,7 +21,7 @@ A **unified portal for model curriculum** designed for **all AICTE-approved inst
 - **Version Control:** Git & GitHub  
 
 ---
-
+   
 ## Folder Structure
 ```
 project-folder/
