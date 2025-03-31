@@ -42,7 +42,7 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden flex flex-col items-center bg-white shadow-lg p-4 space-y-4">
+        <div id="mobile-menu" class=" md:hidden flex flex-col items-center bg-white shadow-lg p-4 space-y-4">
             <a href="#" class="text-lg text-gray-800 hover:text-blue-500">Home</a>
             <a href="#" class="text-lg text-gray-800 hover:text-blue-500">About</a>
             <a href="#" class="text-lg text-gray-800 hover:text-blue-500">Curriculum</a>
