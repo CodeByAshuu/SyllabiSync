@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/src/output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
@@ -11,28 +12,55 @@
 </head>
 
 <body class="font-[Poppins]">
+    
 
-    <!--NAVBAR -->
-    <nav class="flex justify-around gap-10 p-5 text-center shadow-lg shadow-gray-400/50 fixed w-full top-0 bg-white">
-        <!-- logo -->
-        <div class="w-fit">
-            <span class="text-2xl text-white bg-blue-600 p-1 rounded-sm font-semibold">Edu</span>
-            <span class="text-2xl text-blue-600 bg-white p-1 rounded-sm font-semibold">Curricullum</span>
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 w-full bg-white shadow-md shadow-gray-400/50 z-50">
+        <div class="container mx-auto flex items-center justify-between p-5">
+            <!-- Logo -->
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl text-white bg-blue-600 px-2 py-1 rounded-md font-semibold">Syllabi</span>
+                <span class="text-2xl text-blue-600 font-semibold">Sync</span>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#" class="relative text-lg text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Home</a>
+                <a href="#" class="relative text-lg text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">About</a>
+                <a href="#" class="relative text-lg text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Curriculum</a>
+                <a href="#" class="relative text-lg text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Institution</a>
+                <a href="contact.php" class="relative text-lg text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Contact</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-toggle" class="md:hidden text-gray-800 focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
         </div>
 
-        <!-- home contact about curriculum institution -->
-        <div class="flex justify-between gap-8">
-            <a href="#" class="relative text-xl text-gray-800 after:absolute after:left-0 after:bottom-0 after:h-[3px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Home</a>
-            <a href="#" class="relative text-xl text-gray-800 after:absolute after:left-0 after:bottom-0 after:h-[3px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">About</a>
-            <a href="#" class="relative text-xl text-gray-800 after:absolute after:left-0 after:bottom-0 after:h-[3px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Curriculum</a>
-            <a href="#" class="relative text-xl text-gray-800 after:absolute after:left-0 after:bottom-0 after:h-[3px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Institution</a>
-            <a href="#" class="relative text-xl text-gray-800 after:absolute after:left-0 after:bottom-0 after:h-[3px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Contact</a>
-        </div>
-        <div class="flex gap-2">
-            <a href="#" class="border px-3 py-1 text-xl rounded-sm hover:text-gray-500">Login</a>
-            <a href="#" class="bg-blue-500 px-3 py-1 text-xl rounded-sm text-white hover:bg-blue-600">Sign Up</a>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden flex flex-col items-center bg-white shadow-lg p-4 space-y-4">
+            <a href="#" class="text-lg text-gray-800 hover:text-blue-500">Home</a>
+            <a href="#" class="text-lg text-gray-800 hover:text-blue-500">About</a>
+            <a href="#" class="text-lg text-gray-800 hover:text-blue-500">Curriculum</a>
+            <a href="#" class="text-lg text-gray-800 hover:text-blue-500">Institution</a>
+            <a href="contact.php" class="text-lg text-gray-800 hover:text-blue-500">Contact</a>
         </div>
     </nav>
+
+    <!-- Script for Mobile Menu -->
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+
 
     <!-- Hero image -->
     <div class="flex w-fit mx-auto mt-10 gap-50 mb-10">
@@ -152,9 +180,6 @@
             </div>
         </div>
     </footer>
-</body>
-
-</html>
 </body>
 
 </html>

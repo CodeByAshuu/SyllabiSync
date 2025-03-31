@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - AICTE Portal</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/assets/styles.css">
+    <link rel="stylesheet" href="assets/login.css">
 </head>
 <body>
     <div class="container">
         <div class="form-box">
-            <h1 id="title">Register</h1>
+            <h1 id="title">Sign up</h1>
             <form>
                 <div class="input-area">
                     <div class="input-field" id="namefield">
@@ -30,7 +29,7 @@
                     </div>
                 </div>
                 <div class="btn-field">
-                    <button type="button" id="signupBtn">Register</button>
+                    <button type="button" id="signupBtn">Sign up</button>
                     <button type="button" id="signinBtn" class="disable">Sign in</button>
                 </div>
             </form>
