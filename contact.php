@@ -1,3 +1,33 @@
+<!-- form submission using php by sagar -->
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = htmlspecialchars($_POST["name"]);
+    $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
+    $subject = htmlspecialchars($_POST["subject"]);
+    $message = htmlspecialchars($_POST["message"]);
+
+    if (empty($name) || empty($email) || empty($subject) || empty($message)) {
+        echo "All fields are required!";
+        exit;
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "Invalid email format!";
+        exit;
+    }
+
+    $to = "sagarsahu5976@gmail.com"; //replacing with my email
+    $headers = "From: $email\r\nReply-To: $email\r\n";
+    $body = "Name: $name\nEmail: $email\nSubject: $subject\nMessage:\n$message";
+
+    if (mail($to, $subject, $body, $headers)) {
+        echo "success";  // js will read this
+    } else {
+        error_log("Mail sending failed.", 3, "error_log.txt");
+    }
+}
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -73,15 +103,15 @@
     
     <!-- FORM SECTION -->
     <section id="form-details">
-        <form action="">
+        <form action="contact.php" id="contactForm" method="POST">
             <span>LEAVE A MESSAGE</span>
             <h2 class="font-bold">We Love To Hear From You</h2>
-            <input type="text" placeholder="Your Name">
-            <input type="text" placeholder="Your E-mail">
-            <input type="text" placeholder="Your Subject">
+            <input type="text" id="name" name="name" placeholder="Your Name">
+            <input type="email" id="email" name="email" placeholder="Your E-mail">
+            <input type="text" id="subject" name="subject" placeholder="Your Subject">
 
-            <textarea name="" id="" cols="30" rows="10" placeholder="Your Message"></textarea>
-            <button class="bg-blue-400 rounded-lg px-6 py-3">Submit</button>
+            <textarea name="message" id="message" cols="30" rows="10" placeholder="Your Message"></textarea>
+            <button type="submit" class="bg-blue-400 rounded-lg px-6 py-3">Submit</button>
         </form>
         <div class="people">
             <div>
@@ -160,10 +190,23 @@
         </div>
     </footer>
 
-    
-
-
-    <script src="script.js"></script>
+    <!-- form validation using javascript by sagar (still need some work)-->
+    <script>
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+        let name = document.getElementById("name").value.trim();
+        let email = document.getElementById("email").value.trim();
+        let subject = document.getElementById("subject").value.trim();
+        let message = document.getElementById("message").value.trim();
+        
+        if (name === "" || email === "" || subject === "" || message === "") {
+            alert("All fields are required!");
+            event.preventDefault();
+        } else if (!email.includes("@")) {
+            alert("Please enter a valid email address!");
+            event.preventDefault();
+        }
+    });
+    </script>
 
 </body>
 </html>
