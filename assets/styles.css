@@ -56,56 +56,34 @@ button.normal{
 }
 
 
-
-/* page header */
-#page-header{
-    /* background-image: url("img/banner/b1.jpg"); */
-    width: 100%;
-    height: 40vh;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    flex-direction: column;
-    padding: 14px;
-    height: 50vh;
-}
-
-#page-header h2,
-#page-header p{
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
 /* Footer */
 footer {
     display: flex;
     justify-content: center; 
     align-items: center;
-    padding: 40px 60px 20px 70px;
+    padding: 40px 60px 40px 70px;
     margin: 0 auto;
-    line-height: 2;
+    line-height: 2rem;
 }
 
 #footer-inner{
-    padding: 0 60px 0 60px;
+    padding-bottom: 40px;
 }
 
 
 footer h4{
     color: #fff;
     padding-bottom: 10px;
-    font-size:1.125rem;
+    font-size:1rem;
     line-height: 1.75/1.125;
 }
 
-/* ABOUT */
-
-/* main banner */
-#page-header.about-header{
-    background-image: url('/assets/image/banner/banner.png');
-    height: 50vh;
+.special{
+    padding-top: 30px ;
+    font-size: 14px;
+    font-weight: 500;
 }
+/* ABOUT */
 
 /* who are we */
 #about-head{
@@ -262,10 +240,12 @@ footer h4{
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
-    background-image: url('assets/image/banner/b14.png');
+    background-image: url('/assets/image/banner/b14.png');
     background-repeat: no-repeat;
     background-position: 20% 30%;
     background-color: #000501;
+    padding: 60px 40px;
+    margin: 0px;
 }
 
 #newsletter h4{

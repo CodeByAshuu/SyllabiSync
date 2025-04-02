@@ -30,10 +30,11 @@
     </nav>
 
     <!-- MAIN BANNER -->
-    <section id="page-header" class="about-header">
-        <h2 class="font-bold text-5xl">#KnowUs</h2>
-        <p>LET ME TELL YOU ABOUT OURSELVES</p>
+    <section id="page-header" class="about-header w-full h-[50vh] bg-cover flex justify-center text-center flex-col p-4 text-white bg-[url('/assets/image/banner/banner.png')] shadow-lg">
+        <h2 class="font-bold text-5xl text-white text-shadow-md">#KnowUs</h2>
+        <p class="text-white text-shadow-md">LET ME TELL YOU ABOUT OURSELVES</p>
     </section>
+
 
     <!-- WHO ARE WE -->
     <section id="about-head" class="section-p1">
@@ -101,11 +102,12 @@
 
     </section>
 
+
     <!-- FOOTER -->
     <footer class=" bg-gray-900 text-white ">
         <div class="mx-auto px-4">
-            <div class="grid grid-cols-4 gap-18">
-                <div class="py-4" class="footer-inner">
+            <div class="grid grid-cols-4 gap-18" id="footer-inner">
+                <div>
                     <h4 class="text-sm font-semibold mb-4 ">About AICTE</h4>
                     <p class="text-gray-400">
                         All India Council for Technical Education (AICTE) is the statutory body and a national-level council for technical education.
@@ -139,7 +141,7 @@
                     </address>
                 </div>
             </div>
-            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400 special">
                 <p>&copy; <?php echo date('Y'); ?> CTRL+C. All rights reserved.</p>
             </div>
         </div>

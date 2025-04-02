@@ -61,11 +61,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </nav>
 
+
     <!-- MAIN BANNER -->
-    <section id="page-header" class="contact-header">
-        <h2 class="font-bold">#let's_talk</h2>
-        <p>LEAVE A MESSAGE, WE LOVE TO HEAR FROM YOU!</p>
-    </section>
+    <div id="page-header" class="w-full h-[50vh] bg-cover flex justify-center text-center flex-col p-4 text-white bg-[url('/assets/image/banner/banner.png')] shadow-lg">
+        <h2 class="text-white text-shadow-md text-5xl font-bold mb-4">#let's_talk</h2>
+        <p class="text-white text-shadow-md">LEAVE A MESSAGE, WE LOVE TO HEAR FROM YOU!</p>
+    </div>
+
 
     <!-- CONTACT US -->
     <section id="contact-details" class="section-p1">
@@ -143,14 +145,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="text" placeholder="Your email address">
             <button class="normal">Sign Up</button>
         </div>
-    
     </section>
 
     <!-- FOOTER -->
     <footer class=" bg-gray-900 text-white ">
         <div class="mx-auto px-4">
-            <div class="grid grid-cols-4 gap-18">
-                <div class="py-4" class="footer-inner">
+            <div class="grid grid-cols-4 gap-18" id="footer-inner">
+                <div>
                     <h4 class="text-sm font-semibold mb-4 ">About AICTE</h4>
                     <p class="text-gray-400">
                         All India Council for Technical Education (AICTE) is the statutory body and a national-level council for technical education.
@@ -184,11 +185,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </address>
                 </div>
             </div>
-            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400 special">
                 <p>&copy; <?php echo date('Y'); ?> CTRL+C. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+
+    
 
     <!-- form validation using javascript by sagar (still need some work)-->
     <script>
