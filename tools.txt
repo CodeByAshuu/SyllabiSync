@@ -1,4 +1,4 @@
 magicui.design : animated components
 csspeeper : chrome extension for extracting assets/code
 uiverse.io : for ready-made ui components
-Freepik : for minimaistic images
+Freepik : for minimalistic images
