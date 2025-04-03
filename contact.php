@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $body = "Name: $name\nEmail: $email\nSubject: $subject\nMessage:\n$message";
 
     if (mail($to, $subject, $body, $headers)) {
-        echo "success";  // js will read this
+        echo "<script>alert('success')</script>";  // js will read this
     } else {
         error_log("Mail sending failed.", 3, "error_log.txt");
     }

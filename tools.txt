@@ -2,3 +2,6 @@ magicui.design : animated components
 csspeeper : chrome extension for extracting assets/code
 uiverse.io : for ready-made ui components
 Freepik : for minimalistic images
+AICTE Universities : https://www.aicte-india.org/education/institutions/Universities
+College API : https://github.com/sshiwangi/College-API
+COLLEGE API : https://www.data.gov.in/resource/list-all-colleges-2012-2013#api
