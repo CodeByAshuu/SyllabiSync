@@ -15,7 +15,7 @@
             <form method="POST" action="db/signup.php" id="authForm">
                 <div class="input-area">
                     <div class="input-field" id="namefield">
-                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="text" name="name1" placeholder="Your Name" required>
                     </div>
                     <div class="input-field" id="phonefield">
                         <input type="tel" name="phone" placeholder="Phone no." pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
@@ -30,9 +30,14 @@
                         <a href="#" id="forgotPasswordLink">Forgot Password?</a>
                     </div>
                 </div>
+                <div>
+                    <a href="#" id="admin">Login as Admin?</a>
+                    <a href="#" id="faculty">Login as Faculty?</a>
+
+                </div>
                 <div class="btn-field">
-                    <button type="button" id="signupBtn">Sign up</button>
-                    <button type="button" id="signinBtn" class="disable">Sign in</button>
+                    <button type="button" id="signupBtn" name="signUp">Sign up</button>
+                    <button type="button" id="signinBtn" name= "signIn" class="disable">Sign in</button>
                 </div>
             </form>
         </div>
@@ -61,7 +66,7 @@
                 signinBtn.classList.remove("disable");
 
                 // 🔁 Change form action to signin
-                authForm.setAttribute("action", "db/signin.php");
+                authForm.setAttribute("action", "db/signup.php");
             }
 
             function showSignUpFields() {

@@ -1,33 +1,107 @@
 <!-- form submission using php by sagar -->
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = htmlspecialchars($_POST["name"]);
-    $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
-    $subject = htmlspecialchars($_POST["subject"]);
-    $message = htmlspecialchars($_POST["message"]);
+// Initialize variables
+$name = $email = $subject = $message = '';
+$errors = [];
+$success_message = $error_message = '';
 
-    if (empty($name) || empty($email) || empty($subject) || empty($message)) {
-        // echo "All fields are required!";
-        exit;
+// Check if the form is submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+    // Get and sanitize form data
+    $name = htmlspecialchars(trim($_POST['name']));
+    $email = htmlspecialchars(trim($_POST['email']));
+    $subject = htmlspecialchars(trim($_POST['subject']));
+    $message = htmlspecialchars(trim($_POST['message']));
+
+    
+    // Validate inputs
+    if (empty($name)) {
+        $errors[] = "Name is required";
+    } elseif (strlen($name) > 100) {
+        $errors[] = "Name must be less than 100 characters";
+    }
+    
+    if (empty($email)) {
+        $errors[] = "Email is required";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Invalid email format";
     }
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        // echo "Invalid email format!";
-        exit;
+    
+    if (empty($message)) {
+        $errors[] = "Message is required";
+    } elseif (strlen($message) > 1000) {
+        $errors[] = "Message must be less than 1000 characters";
     }
+    
+    // If no errors, proceed with sending email
+    if (empty($errors)) {
+        // Recipient email address
+        $to = "sagarsahu5976@gmail.com";
+        
+        // Subject line based on the selected subject
+        $subject_line = "Contact Form Submission: " . ($subject ? $subject : "General Inquiry");
 
-    $to = "sagarsahu5976@gmail.com"; //replacing with my email
-    $headers = "From: $email\r\nReply-To: $email\r\n";
-    $body = "Name: $name\nEmail: $email\nSubject: $subject\nMessage:\n$message";
-
-    if (mail($to, $subject, $body, $headers)) {
-        echo "<script>alert('success')</script>";  // js will read this
-    } else {
-        error_log("Mail sending failed.", 3, "error_log.txt");
+        // Email headers
+        $headers = "From: $name <$email>" . "\r\n";
+        $headers .= "Reply-To: $email" . "\r\n";
+        $headers .= "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-Type: text/html; charset=UTF-8" . "\r\n";
+        $headers .= "X-Mailer: PHP/" . phpversion();
+        
+        // Email body
+        $email_body = "
+        <html>
+        <head>
+            <title>$subject_line</title>
+            <style>
+                body { font-family: Arial, sans-serif; line-height: 1.6; }
+                table { border-collapse: collapse; width: 100%; max-width: 600px; }
+                th, td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; }
+                th { background-color: #f2f2f2; width: 30%; }
+            </style>
+        </head>
+        <body>
+            <h2>Contact Form Submission</h2>
+            <table>
+                <tr>
+                    <th>Name:</th>
+                    <td>$name</td>
+                </tr>
+                <tr>
+                    <th>Email:</th>
+                    <td>$email</td>
+                </tr>
+                <tr>
+                    <th>Subject:</th>
+                    <td>$subject_line</td>
+                </tr>
+                <tr>
+                    <th>Message:</th>
+                    <td>" . nl2br($message) . "</td>
+                </tr>
+            </table>
+        </body>
+        </html>
+        ";
+        
+        // Send email
+        try {
+            $mail_sent = mail($to, $subject_line, $email_body, $headers);
+            
+            if ($mail_sent) {
+                $success_message = "Thank you for contacting us. We will get back to you soon!";
+                // Clear form fields after successful submission
+                $name = $email = $subject = $message = '';
+            } else {
+                $error_message = "Sorry, there was an error sending your message. Please try again later.";
+            }
+        } catch (Exception $e) {
+            $error_message = "Mailer Error: " . $e->getMessage();
+        }
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -102,19 +176,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6821.539321670383!2d75.69947334407317!3d31.2547991973461!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a5f5e9c489cf3%3A0x4049a5409d53c300!2sLovely%20Professional%20University!5e0!3m2!1sen!2sin!4v1701365479707!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </section>
+
+    <!-- Error Messages -->
+    <?php if (!empty($errors)): ?>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+        <strong>Please correct the following errors:</strong>
+        <ul class="list-disc pl-5 mt-2">
+            <?php foreach ($errors as $error): ?>
+                <li><?php echo htmlspecialchars($error); ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <?php endif; ?>
+
+    <!-- Success Message -->  
+    <?php if (!empty($success_message)): ?>
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
+            <?php echo htmlspecialchars($success_message); ?>
+        </div>
+    <?php endif; ?>
+
+    <!-- Mail Error Message -->
+    <?php if (!empty($error_message)): ?>
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+            <?php echo htmlspecialchars($error_message); ?>
+        </div>
+    <?php endif; ?>
     
     <!-- FORM SECTION -->
     <section id="form-details">
-        <form action="" id="contactForm" method="POST">
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="contactForm" method="POST">
             <span>LEAVE A MESSAGE</span>
             <h2 class="font-bold">We Love To Hear From You</h2>
-            <input type="text" id="name" name="name" placeholder="Your Name">
-            <input type="email" id="email" name="email" placeholder="Your E-mail">
-            <input type="text" id="subject" name="subject" placeholder="Your Subject">
 
-            <textarea name="message" id="message" cols="30" rows="10" placeholder="Your Message"></textarea>
-            <button type="submit" class="bg-blue-400 rounded-lg px-6 py-3">Submit</button>
+            <input type="text" id="name" name="name" placeholder="Your Name" required><span class="text-red-500">*</span>
+            <input type="email" id="email" name="email" placeholder="Your E-mail" required><span class="text-red-500">*</span>
+            <input type="text" id="subject" name="subject" placeholder="Your Subject" required><span class="text-red-500">*</span>
+
+            <textarea id="message" name="message" cols="30" rows="10" placeholder="Your Message"></textarea>
+            <button type="submit" name="submit" class="bg-indigo-600 rounded-lg px-6 py-3">Submit</button>
         </form>
+
+        <!-- people -->
         <div class="people">
             <div>
                 <img src="assets/image/people/1.png" alt="">
@@ -191,23 +294,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </footer>
 
-
-    
-
-    <!-- form validation using javascript by sagar (still need some work)-->
+    <!-- Form validation -->
     <script>
-    document.getElementById("contactForm").addEventListener("submit", function(event) {
-        let name = document.getElementById("name").value.trim();
-        let email = document.getElementById("email").value.trim();
-        let subject = document.getElementById("subject").value.trim();
-        let message = document.getElementById("message").value.trim();
+    document.querySelector('form').addEventListener('submit', function(e) {
+        let valid = true;
         
-        if (name === "" || email === "" || subject === "" || message === "") {
-            alert("All fields are required!");
-            event.preventDefault();
-        } else if (!email.includes("@")) {
-            alert("Please enter a valid email address!");
-            event.preventDefault();
+        // Validate name
+        const name = document.getElementById('name');
+        if (name.value.trim() === '') {
+            valid = false;
+            name.classList.add('border-red-500');
+        } else {
+            name.classList.remove('border-red-500');
+        }
+        
+        // Validate email
+        const email = document.getElementById('email');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email.value)) {
+            valid = false;
+            email.classList.add('border-red-500');
+        } else {
+            email.classList.remove('border-red-500');
+        }
+        
+        // Validate message
+        const message = document.getElementById('message');
+        if (message.value.trim() === '') {
+            valid = false;
+            message.classList.add('border-red-500');
+        } else {
+            message.classList.remove('border-red-500');
+        }
+        
+        if (!valid) {
+            e.preventDefault();
         }
     });
     </script>
