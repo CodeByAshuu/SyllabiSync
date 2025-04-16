@@ -23,7 +23,7 @@
                 <a href="landing_page.php" class="relative text-base text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Home</a>
                 <a href="about.php" class="relative text-base text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">About</a>
                 <a href="#" class="relative text-base text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Curriculum</a>
-                <a href="#" class="relative text-base text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Institution</a>
+                <a href="institute.php" class="relative text-base text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Institution</a>
                 <a href="contact.php" class="relative text-base text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Contact</a>
             </div>
         </div>
@@ -41,14 +41,37 @@
         <img src="assets/image/about/a1.jpg" alt="">
         <div>
             <h2 class="font-bold text-5xl text-blue-600">Who We Are</h2>
-            <p>WE are Students from K23SB section of B. Tech Computer Science Programme (P123). We Made this Website for our CA3 of CSE326 -Internet Programming Practices.That's it! Thanks.</p>
+            <p>We are a team of passionate B.Tech Computer Science students from section KM010 (P123), currently studying at Lovely Professional University. <strong>SyllabiSync</strong> is a web platform we built as part of our CA2 project for the course <em>INT219 - Front-End Web Development & INT220 - Server Side Scripting</em>.
+            Our mission is to simplify and unify access to academic curricula across various institutions. We aim to make it easier for students, faculty, and institutions to access, compare, and manage curriculum content seamlessly and efficiently.</p>
             
-            <abbr title="">Create stunning images with as much or as little control as you like thanks to a choice of Basic and Creative modes</abbr>
+            <abbr title="">SyllabiSync simplifies academic management by enabling quick curriculum access, updates, and synchronization across institutions.</abbr>
             <br><br>
 
-            <marquee bgcolor="#ccc" loop="-1" scrollamount="10" width="100%">Create stunning images with as much or as little control as you like thanks to a choice of Basic and Creative modes</marquee>
+            <marquee bgcolor="#ccc" loop="-1" scrollamount="10" width="100%">Empowering institutions to stay updated, stay synced, and stay ahead with standardized curriculum solutions — SyllabiSync</marquee>
         </div>
     </section>
+    
+    <!-- OUR MISSION -->
+    <section class="p-12 md:p-15">
+        <h2 class="font-bold text-4xl text-blue-600 flex justify-center mb-20">Our Mission</h2>
+        <blockquote class="text-lg text-gray-700 text-center max-w-3xl m-10 p-12">
+            At SyllabiSync, our mission is to bring consistency and transparency to academic programs. 
+            We envision a future where students and institutions can collaborate and innovate on a shared academic foundation.
+        </blockquote>
+    </section>
+    
+
+    <!-- WHAT WE OFFER -->
+    <h2 class="font-bold text-4xl text-blue-600 mt-10">What We Offer</h2>
+    <ul class="list-disc ml-6 text-gray-700">
+    <li>Standardized curriculum viewing and sharing</li>
+    <li>Institution-specific curriculum comparison</li>
+    <li>Easy navigation across different academic streams</li>
+    <li>Resource sharing between students and faculty</li>
+    </ul>
+
+
+
 
     <!-- ABOUT APP -->
     <section id="about-app" class="section-p1">
@@ -58,7 +81,7 @@
         </div>
     </section>
 
-    <!-- FEATURES SECTION  -->
+    <!-- FEATURES SECTION (issue) -->
     <section class="py-10 bg-gray-100">
     <h1 class="text-5xl font-semibold text-center mt-5 py-10">Key <span class="text-blue-600">Features</span></h1>
         <div class="container mx-auto px-4">
