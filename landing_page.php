@@ -1,9 +1,3 @@
-<?php 
-session_start(); // Start the session
-include 'db/config.php'; // contains DB connection
-
-?>
-
 
 <!DOCTYPE html>
 <html lang="en">
