@@ -11,7 +11,7 @@
     <title>SyllabiSync</title>
     <style>
         .aurora-text {
-            background: linear-gradient(45deg,#00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+            background: linear-gradient(45deg,#FF0080, #7928CA, #0070F3, #38bdf8);
             background-size: 400%;
             -webkit-background-clip: text;
             background-clip: text;
@@ -38,52 +38,41 @@
     
 
     <!-- NAVBAR -->
-    <nav class="fixed top-0 w-full bg-white shadow-md shadow-gray-400/50 z-50">
-        <div class="container mx-auto flex items-center justify-between p-5">
-            <!-- Logo -->
+    <nav class="flex justify-around gap-10 fixed top-0 h-20 w-full p-6 text-center items-center shadow-md shadow-gray-400/50 bg-white z-50">
+        <div class="container mx-auto flex items-center justify-between p-5">    
+            <!-- logo -->
             <div class="flex items-center space-x-2">
                 <span class="text-2xl text-white bg-blue-600 px-2 py-1 rounded-md font-semibold">Syllabi</span>
                 <span class="text-2xl text-blue-600 font-semibold">Sync</span>
             </div>
 
             <!-- Desktop Menu -->
-            <div class="hidden md:flex space-x-8">
-                <a href="landing_page.php" class="relative text-lg text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Home</a>
-                <a href="about.php" class="relative text-lg text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">About</a>
-                <a href="#" class="relative text-lg text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Curriculum</a>
-                <a href="institute.php" class="relative text-lg text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Institution</a>
-                <a href="contact.php" class="relative text-lg text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Contact</a>
+            <div class="hidden md:flex justify-between space-x-8 gap-8 font-medium ">
+                <a href="landing_page.php" class="relative text-base text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Home</a>
+                <a href="about.php" class="relative text-base text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">About</a>
+                <a href="#" class="relative text-base text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Curriculum</a>
+                <a href="institute.php" class="relative text-base text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Institution</a>
+                <a href="contact.php" class="relative text-base text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Contact</a>
             </div>
-
-            <!-- Mobile Menu Button -->
-            <button id="menu-toggle" class="md:hidden text-gray-800 focus:outline-none">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
-            </button>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class=" md:hidden flex flex-col items-center bg-white shadow-lg p-4 space-y-4">
-            <a href="#" class="text-lg text-gray-800 hover:text-blue-500">Home</a>
-            <a href="#" class="text-lg text-gray-800 hover:text-blue-500">About</a>
-            <a href="#" class="text-lg text-gray-800 hover:text-blue-500">Curriculum</a>
-            <a href="#" class="text-lg text-gray-800 hover:text-blue-500">Institution</a>
-            <a href="contact.php" class="text-lg text-gray-800 hover:text-blue-500">Contact</a>
         </div>
     </nav>
 
-    <!-- Script for Mobile Menu -->
-    <script>
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
+    <!-- Mobile Menu Button -->
+    <button id="menu-toggle" class="md:hidden text-gray-800 focus:outline-none">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+    </button>
 
-        menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-    </script>
-
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class=" md:hidden flex flex-col items-center bg-white shadow-lg p-4 space-y-4">
+        <a href="#" class="text-lg text-gray-800 hover:text-blue-500">Home</a>
+        <a href="#" class="text-lg text-gray-800 hover:text-blue-500">About</a>
+        <a href="#" class="text-lg text-gray-800 hover:text-blue-500">Curriculum</a>
+        <a href="#" class="text-lg text-gray-800 hover:text-blue-500">Institution</a>
+        <a href="contact.php" class="text-lg text-gray-800 hover:text-blue-500">Contact</a>
+    </div>
 
     <!-- Hero image -->
     <div class="flex w-fit mx-auto mt-10 gap-50 mb-10 min-h-screen" data-aos="fade-up" data-aos-duration="1000">
@@ -195,7 +184,7 @@
                 </div>
             </div>
         </div>
-    </section>3
+    </section>
 
     
     <!-- AICTE Quality Parameters -->

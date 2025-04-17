@@ -1,5 +1,7 @@
 <!-- form submission using php by sagar -->
 <?php
+session_start(); // Start the session at the very beginning
+
 // Initialize variables
 $name = $email = $subject = $message = '';
 $errors = [];
@@ -13,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     $subject = htmlspecialchars(trim($_POST['subject']));
     $message = htmlspecialchars(trim($_POST['message']));
 
-    
     // Validate inputs
     if (empty($name)) {
         $errors[] = "Name is required";
@@ -27,7 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         $errors[] = "Invalid email format";
     }
 
-    
     if (empty($message)) {
         $errors[] = "Message is required";
     } elseif (strlen($message) > 1000) {
@@ -36,70 +36,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     
     // If no errors, proceed with sending email
     if (empty($errors)) {
-        // Recipient email address
-        $to = "sagarsahu5976@gmail.com";
-        
-        // Subject line based on the selected subject
-        $subject_line = "Contact Form Submission: " . ($subject ? $subject : "General Inquiry");
-
-        // Email headers
-        $headers = "From: $name <$email>" . "\r\n";
-        $headers .= "Reply-To: $email" . "\r\n";
-        $headers .= "MIME-Version: 1.0" . "\r\n";
-        $headers .= "Content-Type: text/html; charset=UTF-8" . "\r\n";
-        $headers .= "X-Mailer: PHP/" . phpversion();
-        
-        // Email body
-        $email_body = "
-        <html>
-        <head>
-            <title>$subject_line</title>
-            <style>
-                body { font-family: Arial, sans-serif; line-height: 1.6; }
-                table { border-collapse: collapse; width: 100%; max-width: 600px; }
-                th, td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; }
-                th { background-color: #f2f2f2; width: 30%; }
-            </style>
-        </head>
-        <body>
-            <h2>Contact Form Submission</h2>
-            <table>
-                <tr>
-                    <th>Name:</th>
-                    <td>$name</td>
-                </tr>
-                <tr>
-                    <th>Email:</th>
-                    <td>$email</td>
-                </tr>
-                <tr>
-                    <th>Subject:</th>
-                    <td>$subject_line</td>
-                </tr>
-                <tr>
-                    <th>Message:</th>
-                    <td>" . nl2br($message) . "</td>
-                </tr>
-            </table>
-        </body>
-        </html>
-        ";
-        
-        // Send email
         try {
-            $mail_sent = mail($to, $subject_line, $email_body, $headers);
-            
-            if ($mail_sent) {
-                $success_message = "Thank you for contacting us. We will get back to you soon!";
-                // Clear form fields after successful submission
-                $name = $email = $subject = $message = '';
-            } else {
-                $error_message = "Sorry, there was an error sending your message. Please try again later.";
-            }
+            // Load Composer's autoloader
+            require 'vendor/autoload.php';
+
+            // Create an instance of PHPMailer
+            $mail = new PHPMailer\PHPMailer\PHPMailer(true);
+
+            // Server settings
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';  // Use Gmail SMTP server
+            $mail->SMTPAuth = true;
+            $mail->Username = 'sagarsahu5976@gmail.com';  // Your Gmail address
+            $mail->Password = 'qbwf ezcf yeuf nwgr';      // Your Gmail app password
+            $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+
+            // Recipients
+            $mail->setFrom($email, $name);
+            $mail->addAddress('sagarsahu5976@gmail.com');  // Where you want to receive emails
+
+            // Content
+            $mail->isHTML(true);
+            $mail->Subject = $subject ?: "Contact Form Submission";
+            $mail->Body = "
+                <h2>Contact Form Submission</h2>
+                <p><strong>Name:</strong> {$name}</p>
+                <p><strong>Email:</strong> {$email}</p>
+                <p><strong>Subject:</strong> {$subject}</p>
+                <p><strong>Message:</strong></p>
+                <p>" . nl2br($message) . "</p>
+            ";
+
+            $mail->send();
+            $_SESSION['success_message'] = "Thank you for contacting us. We will get back to you soon!";
+            // Clear form fields after successful submission
+            $name = $email = $subject = $message = '';
+            // Redirect to prevent form resubmission
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit();
         } catch (Exception $e) {
-            $error_message = "Mailer Error: " . $e->getMessage();
+            $error_message = "Mailer Error: " . $mail->ErrorInfo;
         }
     }
+}
+
+// Get success message from session and clear it
+if (isset($_SESSION['success_message'])) {
+    $success_message = $_SESSION['success_message'];
+    unset($_SESSION['success_message']);
 }
 ?>
 
@@ -112,11 +97,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     <link rel="stylesheet" href="/assets/styles.css">
     <link rel="stylesheet" href="/src/output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 0,
+                disable: 'mobile'
+            });
+        });
+    </script>
 </head>
 <body class="font-[Poppins] flex flex-col min-h-screen">
 
     <!--NAVBAR -->
-    <nav class="flex justify-around gap-10 fixed top-0  h-20 w-full p-6 text-center items-center shadow-md shadow-gray-400/50 bg-white">
+    <nav class="flex justify-around gap-10 fixed top-0 h-20 w-full p-6 text-center items-center shadow-md shadow-gray-400/50 bg-white z-50">
         <div class="container mx-auto flex items-center justify-between p-5">    
             <!-- logo -->
             <div class="flex items-center space-x-2">
@@ -125,26 +124,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             </div>
 
             <!-- Desktop Menu -->
-            <div class="hidden md:flex justify-between space-x-8 gap-8 font-medium ">
-                <a href="landing_page.php" class="relative text-base text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Home</a>
-                <a href="about.php" class="relative text-base text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">About</a>
-                <a href="#" class="relative text-base text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Curriculum</a>
-                <a href="institute.php" class="relative text-base text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Institution</a>
-                <a href="contact.php" class="relative text-base text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Contact</a>
+            <div class="hidden md:flex justify-between space-x-9 gap-18 font-semibold ">
+                <a href="landing_page.php" class="relative text-sm text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Home</a>
+                <a href="about.php" class="relative text-sm text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">About</a>
+                <a href="#" class="relative text-sm text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Curriculum</a>
+                <a href="institute.php" class="relative text-sm text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Institution</a>
+                <a href="contact.php" class="relative text-sm text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Contact</a>
             </div>
         </div>
     </nav>
 
 
     <!-- MAIN BANNER -->
-    <div id="page-header" class="w-full h-[50vh] bg-cover flex justify-center text-center flex-col p-4 text-white bg-[url('/assets/image/banner/banner.png')] shadow-lg">
+    <div id="page-header" class="w-full h-[50vh] bg-cover flex justify-center text-center flex-col p-4 text-white bg-[url('/assets/image/banner/banner.png')] shadow-lg mt-20">
         <h2 class="text-white text-shadow-md text-5xl font-bold mb-4">#let's_talk</h2>
         <p class="text-white text-shadow-md">LEAVE A MESSAGE, WE LOVE TO HEAR FROM YOU!</p>
     </div>
 
 
     <!-- CONTACT US -->
-    <section id="contact-details" class="section-p1">
+    <section id="contact-details" class="section-p1" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
         <div class="details">
             <span>GET IN TOUCH</span>
             <h2 class="font-bold">Visit one of our agency locations or contact us today</h2>
@@ -191,8 +190,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 
     <!-- Success Message -->  
     <?php if (!empty($success_message)): ?>
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
-            <?php echo htmlspecialchars($success_message); ?>
+        <div class="fixed top-30 right-5 z-50 ">
+            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 px-4 py-3 rounded-lg shadow-lg" role="alert">
+                <div class="flex items-center">
+                    <div class="py-1">
+                        <svg class="fill-current h-6 w-6 text-green-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-bold">Success!</p>
+                        <p><?php echo htmlspecialchars($success_message); ?></p>
+                    </div>
+                    <button onclick="this.parentElement.parentElement.remove()" class="ml-auto text-green-500 hover:text-green-700">
+                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
         </div>
     <?php endif; ?>
 
@@ -204,17 +220,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     <?php endif; ?>
     
     <!-- FORM SECTION -->
-    <section id="form-details">
+    <section id="form-details" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="contactForm" method="POST">
             <span>LEAVE A MESSAGE</span>
             <h2 class="font-bold">We Love To Hear From You</h2>
 
-            <input type="text" id="name" name="name" placeholder="Your Name" required><span class="text-red-500">*</span>
-            <input type="email" id="email" name="email" placeholder="Your E-mail" required><span class="text-red-500">*</span>
-            <input type="text" id="subject" name="subject" placeholder="Your Subject" required><span class="text-red-500">*</span>
+            <input type="text" id="name" name="name" placeholder="Your Name" required
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent hover:border-blue-400 transition duration-300"><span class="text-red-500">*</span>
+            <input type="email" id="email" name="email" placeholder="Your E-mail" required
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent hover:border-blue-400 transition duration-300"><span class="text-red-500">*</span>
+            <input type="text" id="subject" name="subject" placeholder="Your Subject" required
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent hover:border-blue-400 transition duration-300"><span class="text-red-500">*</span>
 
-            <textarea id="message" name="message" cols="30" rows="10" placeholder="Your Message"></textarea>
-            <button type="submit" name="submit" class="bg-indigo-600 rounded-lg px-6 py-3">Submit</button>
+            <textarea id="message" name="message" cols="30" rows="10" placeholder="Your Message"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent hover:border-blue-400 transition duration-300"></textarea>
+            <button type="submit" name="submit" 
+                class="w-full bg-indigo-600 text-white rounded-lg px-6 py-3 hover:bg-indigo-700 transition duration-300">
+                Submit
+            </button>
         </form>
 
         <!-- people -->
@@ -240,18 +263,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     <!-- NEWSLETTER -->
     <section id="newsletter" class="section-p1 section-m1">
         <div class="newstext">
-            <h4>Sign Up For News Letters</h4>
+            <h4>Looking For News Letters?</h4>
             <p>Get E-mail Updates About Our Latest Syllabus And <span>Special Curriculum.</span></p>    
         </div>
 
-        <div class="form">
-            <input type="text" placeholder="Your email address">
-            <button class="normal">Sign Up</button>
+        <div class="pr-0 mr-0">
+            <!-- <input type="text" placeholder="Your email address"> -->
+            <a class="w-64 h-15 bg-blue-500 rounded-sm text-white font-medium text-xl flex justify-center items-center" href="https://facilities.aicte-india.org/AICTEConnect/FEB2025/#p=1" target="_blank">Newsletter</a>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class=" bg-gray-900 text-white ">
+    <footer class="bg-gray-900 text-white">
         <div class="mx-auto px-4">
             <div class="grid grid-cols-4 gap-18" id="footer-inner">
                 <div>
