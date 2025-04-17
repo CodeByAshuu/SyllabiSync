@@ -156,21 +156,21 @@
 
 
     <!-- FOOTER -->
-    <footer class=" bg-gray-900 text-white ">
-        <div class="mx-auto px-4">
-            <div class="grid grid-cols-4 gap-18" id="footer-inner">
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
                 <div>
-                    <h4 class="text-sm font-semibold mb-4 ">About AICTE</h4>
+                    <h4 class="text-lg font-semibold mb-4">About AICTE</h4>
                     <p class="text-gray-400">
                         All India Council for Technical Education (AICTE) is the statutory body and a national-level council for technical education.
                     </p>
                 </div>
-                <div class="p-12">
-                    <h4 class="text-base font-semibold mb-4 ">Quick Links</h4>
-                    <ul class="space-y-12 text-gray-400 flex flex-col justify-between">
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
                         <li><a href="landing_page.php" class="hover:text-orange-300">Home</a></li>
                         <li><a href="about.php" class="hover:text-orange-300">About</a></li>
-                        <li><a href="curriculum.php" class="hover:text-orange-300">Curriculum</a></li>
+                        <li><a href="#" class="hover:text-orange-300">Curriculum</a></li>
                         <li><a href="contact.php" class="hover:text-orange-300">Contact</a></li>
                     </ul>
                 </div>
@@ -193,7 +193,7 @@
                     </address>
                 </div>
             </div>
-            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400 special">
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
                 <p>&copy; <?php echo date('Y'); ?> CTRL+C. All rights reserved.</p>
             </div>
         </div>
