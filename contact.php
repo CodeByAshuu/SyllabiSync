@@ -1,6 +1,8 @@
 <!-- form submission using php by sagar -->
 <?php
 session_start(); // Start the session at the very beginning
+require 'vendor/autoload.php'; // Load Composer's autoloader
+
 
 // Initialize variables
 $name = $email = $subject = $message = '';
@@ -47,8 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';  // Use Gmail SMTP server
             $mail->SMTPAuth = true;
-            $mail->Username = 'sagarsahu5976@gmail.com';  // Your Gmail address
-            // Removed exposed app password — use .env instead
+            include 'pass.php'; // Include your config file for email credentials
             $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
