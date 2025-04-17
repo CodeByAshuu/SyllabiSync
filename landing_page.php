@@ -9,6 +9,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <title>SyllabiSync</title>
+    <style>
+        .aurora-text {
+            background: linear-gradient(45deg,#00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+            background-size: 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: aurora 7s linear infinite;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        @keyframes aurora {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
 </head>
 
 <body class="font-[Poppins]">
@@ -65,8 +88,8 @@
     <!-- Hero image -->
     <div class="flex w-fit mx-auto mt-10 gap-50 mb-10 min-h-screen" data-aos="fade-up" data-aos-duration="1000">
         <div class="flex flex-col justify-evenly gap-3 w-105">
-            <p class="text-6xl font-bold" data-aos="fade-right" data-aos-delay="200">Welcome to <span class="text-blue-700">Curricullum Management Portal</span></p>
-            <p class="font-semibold text-2xl text-gray-700" data-aos="fade-right" data-aos-delay="400">Your one stop for managing all curricullum from different AICTE universities</p>
+            <p class="text-6xl font-bold" data-aos="fade-right" data-aos-delay="200">Welcome to <span class="aurora-text">Curriculum Management Portal</span></p>
+            <p class="font-semibold text-2xl text-gray-700" data-aos="fade-right" data-aos-delay="400">Your one stop for managing all curriculum from different AICTE universities</p>
         </div>
         <div class="w-180" data-aos="fade-left" data-aos-delay="600">
             <img class="h=[600px]" src="assets\image\hero1.png" alt="">

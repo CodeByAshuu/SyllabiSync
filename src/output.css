@@ -932,6 +932,9 @@
   .w-12 {
     width: calc(var(--spacing) * 12);
   }
+  .w-72 {
+    width: calc(var(--spacing) * 72);
+  }
   .w-105 {
     width: calc(var(--spacing) * 105);
   }
@@ -940,9 +943,6 @@
   }
   .w-60 {
     width: calc(var(--spacing) * 60);
-  }
-  .w-72 {
-    width: calc(var(--spacing) * 72);
   }
   .w-80 {
     width: calc(var(--spacing) * 80);
@@ -970,6 +970,9 @@
   }
   .max-w-3xl {
     max-width: var(--container-3xl);
+  }
+  .max-w-4xl {
+    max-width: var(--container-4xl);
   }
   .max-w-7xl {
     max-width: var(--container-7xl);
@@ -1480,6 +1483,13 @@
       margin-inline-end: calc(calc(var(--spacing) * 8) * calc(1 - var(--tw-space-x-reverse)));
     }
   }
+  .space-x-\[-12px\] {
+    :where(& > :not(:last-child)) {
+      --tw-space-x-reverse: 0;
+      margin-inline-start: calc(-12px * var(--tw-space-x-reverse));
+      margin-inline-end: calc(-12px * calc(1 - var(--tw-space-x-reverse)));
+    }
+  }
   .space-x-reverse {
     :where(& > :not(:last-child)) {
       --tw-space-x-reverse: 1;
@@ -1649,6 +1659,10 @@
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
+  }
+  .border-2 {
+    border-style: var(--tw-border-style);
+    border-width: 2px;
   }
   .border-x {
     border-inline-style: var(--tw-border-style);
@@ -2997,6 +3011,11 @@
       border-color: var(--color-blue-500);
     }
   }
+  .focus\:border-transparent {
+    &:focus {
+      border-color: transparent;
+    }
+  }
   .focus\:ring-2 {
     &:focus {
       --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentColor);
@@ -3019,6 +3038,11 @@
       outline-style: none;
     }
   }
+  .sm\:inline {
+    @media (width >= 40rem) {
+      display: inline;
+    }
+  }
   .sm\:grid-cols-2 {
     @media (width >= 40rem) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3039,6 +3063,11 @@
       display: none;
     }
   }
+  .md\:w-2\/3 {
+    @media (width >= 48rem) {
+      width: calc(2/3 * 100%);
+    }
+  }
   .md\:w-auto {
     @media (width >= 48rem) {
       width: auto;
@@ -3057,6 +3086,11 @@
   .md\:grid-cols-4 {
     @media (width >= 48rem) {
       grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  .md\:flex-row {
+    @media (width >= 48rem) {
+      flex-direction: row;
     }
   }
   .lg\:grid-cols-3 {

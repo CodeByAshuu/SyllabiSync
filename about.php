@@ -62,6 +62,45 @@
             <marquee bgcolor="#ccc" loop="-1" scrollamount="10" width="100%" class="text-gray-700">Empowering institutions to stay updated, stay synced, and stay ahead with standardized curriculum solutions — SyllabiSync</marquee>
         </div>
     </section>
+
+    <!-- TEAM MEMBERS -->
+    <section class="py-8 bg-white" data-aos="fade-up" data-aos-once="false">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-blue-600 mb-8">Our Team</h2>
+            <div class="flex justify-center">
+                <div class="flex items-center space-x-[-12px]">
+                    <!-- 1st Account -->
+                    <a href="https://github.com/CodeByAshuu" target="_blank">
+                        <img src="https://avatars.githubusercontent.com/u/141819298?v=4" alt="Ashu" class="w-12 h-12 rounded-full border-2 border-white" />
+                    </a>
+                    
+                    <!-- 2nd Account -->
+                    <a href="https://github.com/Dheeraj-Kapuganti" target="_blank">
+                        <img src="https://avatars.githubusercontent.com/u/148957514?v=4" alt="Dheeraj" class="w-12 h-12 rounded-full border-2 border-white" />
+                    </a>
+                    
+                    <!-- 3rd Account -->
+                    <a href="https://github.com/linuxuser123456789" target="_blank">
+                        <img src="https://avatars.githubusercontent.com/u/97976303?v=4" alt="LinuxUser" class="w-12 h-12 rounded-full border-2 border-white" />
+                    </a>
+
+                    <!-- 4th Account -->
+                    <img src="/mnt/data/c0067f22-ee84-4cbd-b3e6-a733a6625682.png" alt="Account 4" class="w-12 h-12 rounded-full border-2 border-white" />
+
+                    <!-- Placeholder 5th -->
+                    <img src="https://i.pinimg.com/564x/3b/b1/d0/3bb1d0e89e68f982a08f6fa452d82c69.jpg" alt="Avatar" class="w-12 h-12 rounded-full border-2 border-white" />
+
+                    <!-- Placeholder 6th -->
+                    <img src="https://i.pinimg.com/564x/e4/86/0e/e4860ec019b39640cf6262897bb8b347.jpg" alt="Avatar" class="w-12 h-12 rounded-full border-2 border-white" />
+
+                    <!-- +99 Circle -->
+                    <div class="w-12 h-12 flex items-center justify-center rounded-full bg-black text-white text-sm font-semibold border-2 border-white">
+                        +99
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     
     <!-- OUR MISSION -->
     <section class="py-16 bg-white" data-aos="fade-up" data-aos-once="false">
@@ -141,17 +180,49 @@
     </section>
 
     <!-- NEWSLETTER -->
-    <section id="newsletter" class="section-p1 section-m1">
-        <div class="newstext">
-            <h4>Sign Up For News Letters</h4>
-            <p>Get E-mail Updates About Our Latest Shop And <span>Special Offers.</span></p>    
-        </div>
+    <section id="newsletter" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-8">
+                    <h4 class="text-2xl font-bold text-gray-800 mb-2">Sign Up For Newsletter</h4>
+                    <p class="text-gray-600">Get E-mail Updates About Our Latest Updates And <span class="text-blue-600 font-semibold">Special Offers</span></p>    
+                </div>
 
-        <div class="form">
-            <input type="text" placeholder="Your email address">
-            <button class="normal">Sign Up</button>
-        </div>
+                <?php
+                // Display success/error messages
+                if (isset($_GET['success']) && $_GET['success'] == 'subscribed') {
+                    echo '<div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                            <span class="block sm:inline">Thank you for subscribing to our newsletter!</span>
+                          </div>';
+                }
+                if (isset($_GET['error'])) {
+                    $error = $_GET['error'];
+                    $message = '';
+                    if ($error == 'invalid_email') {
+                        $message = 'Please enter a valid email address.';
+                    } elseif ($error == 'already_subscribed') {
+                        $message = 'This email is already subscribed to our newsletter.';
+                    } elseif ($error == 'database_error') {
+                        $message = 'An error occurred. Please try again later.';
+                    }
+                    echo '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                            <span class="block sm:inline">' . $message . '</span>
+                          </div>';
+                }
+                ?>
 
+                <form action="subscribe.php" method="POST" class="flex flex-col md:flex-row gap-4 justify-center items-center">
+                    <div class="w-full md:w-2/3">
+                        <input type="email" name="email" placeholder="Your email address" required
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <button type="submit" name="subscribe" 
+                        class="w-full md:w-auto px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300">
+                        Subscribe
+                    </button>
+                </form>
+            </div>
+        </div>
     </section>
 
 
