@@ -1,36 +1,36 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "frontend_backend";
-
-$conn = mysqli_connect($servername, $username, $password, $database);
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $query = "SELECT file_name FROM syllabus_approvals WHERE id = '$id'";
+    $conn = mysqli_connect("localhost", "root", "", "frontend&backend");
+    if (!$conn) die("Connection failed: " . mysqli_connect_error());
+
+    $id = intval($_GET['id']);
+    $query = "SELECT file_name FROM syllabus_approvals WHERE id = $id";
     $result = mysqli_query($conn, $query);
 
     if ($row = mysqli_fetch_assoc($result)) {
-        $file_name = $row['file_name'];
-        $file_path = "uploads/" . $file_name;
+        // Construct the correct file path
+        $file = __DIR__ . "/uploads/" . $row['file_name'];  // Adjust the path to the uploads directory
 
-        if (file_exists($file_path)) {
+        // Debugging output
+        echo "File path: " . $file . "<br>";
+
+        if (file_exists($file)) {
             header("Content-type: application/pdf");
-            header("Content-Disposition: inline; filename=\"" . $file_name . "\"");
-            readfile($file_path);
-            exit();
+            header("Content-Disposition: inline; filename=" . $row['file_name']);
+            @readfile($file);
+            exit;
         } else {
-            echo "File not found.";
+            echo "File not found: " . $file;
         }
     } else {
-        echo "Invalid ID or no file found for the given ID.";
+        echo "Invalid ID.";
     }
-} else {
-    echo "ID parameter is missing.";
-}
 
-mysqli_close($conn);
+    mysqli_close($conn);
+} else {
+    echo "No ID specified.";
+}
+?>
