@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Styled Form</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-blue-400 to-blue-500 min-h-screen flex flex-col items-center justify-center">
+
+  <!-- Navbar -->
+  <div id="navbar" class="w-full max-w-2xl bg-white shadow-lg rounded-lg p-4 flex justify-between items-center mb-6 mt-2">
+    <h1 class="text-lg font-semibold text-gray-700">Welcome, <span class="text-blue-600 font-bold">abc123</span></h1>
+
+    <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow-md">
+
+      <a href="teacher_dashboard.html">Logout</a>
+    </button>
+  </div>
+
+  <!-- Form Container -->
+  <div class="w-full max-w-2xl bg-white p-6 rounded-lg shadow-xl">
+
+    <form action="">
+      <!-- Select Stream -->
+      <div class="mb-4">
+        <label class="block text-gray-700 font-medium mb-2">Select Stream</label>
+        <select name="cars" id="js-stream" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500">
+          <option value="CSE">CSE</option>
+          <option value="ECE">ECE</option>
+          <option value="Mech">Mech</option>
+          <option value="AI and Robotics">AI and Robotics</option>
+        </select>
+      </div>
+
+      <!-- Course Name -->
+      <div class="mb-4">
+        <label class="block text-gray-700 font-medium">Course Code</label>
+        <input type="text" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500" id="js-code">
+      </div>
+
+      <!-- Title -->
+      <div class="mb-4">
+        <label class="block text-gray-700 font-medium">Title</label>
+        <input type="text" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500" id="js-title">
+      </div>
+
+      <!-- Dynamic Fields Container -->
+      <div id="js-unit-adder">
+        <div id="js-unit-adder-son" class="bg-gray-100 p-4 rounded-lg shadow-inner mb-4">
+          <div class="mb-3">
+            <label class="block text-gray-700 font-medium">Enter Unit Name</label>
+            <input type="text" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500">
+          </div>
+
+          <div>
+            <label class="block text-gray-700 font-medium">Enter Topics</label>
+            <textarea class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500"></textarea>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <!-- Buttons -->
+    <div class="flex gap-4 mt-4">
+      <button id="add" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md">Add</button>
+      <button id="remove" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg shadow-md">Remove</button>
+      <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg shadow-md" id="upload">Upload</button>
+
+    </div>
+
+  </div>
+
+  <script src="javascript/script.js"></script>
+  <script src="javascript/data.js"></script>
+</body>
+</html>
