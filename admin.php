@@ -32,7 +32,8 @@ $rejectedCount = mysqli_fetch_assoc($rejectedResult)['count'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link rel="stylesheet" href="/src/output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .sidebar-item {
@@ -100,10 +101,10 @@ $rejectedCount = mysqli_fetch_assoc($rejectedResult)['count'];
                 </h1>
                 <p class="text-gray-600">Welcome back, Administrator</p>
             </div>
-            <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow transition duration-200 flex items-center gap-2">
+            <!-- <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow transition duration-200 flex items-center gap-2">
                 <i class="fas fa-sign-out-alt"></i>
                 Logout
-            </button>
+            </button> -->
         </div>
 
         <!-- Summary Cards -->

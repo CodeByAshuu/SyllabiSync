@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-blue-300 via-blue-400 to-blue-500 min-h-screen flex items-center justify-center">
+    <div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-lg">
+        <div class="flex items-center space-x-4">
+            <!-- Profile Image -->
+            <label for="profileImageInput">
+                <img id="profileImage" src="" 
+                    alt="Profile" 
+                    class="w-20 h-20 rounded-full border-2 border-blue-400 cursor-pointer">
+            </label>
+            <!-- Hidden File Input -->
+            <input type="file" id="profileImageInput" accept="image/*" class="hidden">
+
+            <div>
+                <h2 id="teacherName" class="text-xl font-bold text-gray-700"></h2>
+                <p id="teacherEmail" class="text-gray-500"></p>
+            </div>
+        </div>
+        
+        <div class="mt-6 space-y-4">
+            <div>
+                <label class="block text-gray-600">Email</label>
+                <input type="text" id="fullName" class="w-full border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+            <div>
+                <label class="block text-gray-600">Gender</label>
+                <select id="gender" class="w-full border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-gray-600">Country</label>
+                <input type="text" id="country" class="w-full border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+            <div>
+                <label class="block text-gray-600">Id number</label>
+                <input type="text" id="idNumber" class="w-full border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+            <div>
+                <label class="block text-gray-600">University Name</label>
+                <input type="text" id="universityName" class="w-full border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+        </div>
+        
+        <div class="mt-6 flex justify-end">
+            <button id="saveBtn" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Save Changes</button>
+            <button id="exitBtn" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 ml-2">Exit</button>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const profileImage = document.getElementById('profileImage');
+        const profileImageInput = document.getElementById('profileImageInput');
+        const teacherName = document.getElementById('teacherName');
+        const fullNameInput = document.getElementById('fullName');
+        const genderSelect = document.getElementById('gender');
+        const countryInput = document.getElementById('country');
+        const idNumberInput = document.getElementById('idNumber');
+        const universityNameInput = document.getElementById('universityName');
+        const saveBtn = document.getElementById('saveBtn');
+        const exitBtn = document.getElementById('exitBtn');
+
+        // Fetch teacher profile data
+        async function fetchTeacherProfile() {
+            try {
+                const response = await fetch('get_teacher_profile.php');
+                const result = await response.json();
+                
+                if (result.success) {
+                    const teacher = result.data;
+                    
+                    // Update profile image
+                    profileImage.src = teacher.profileImage;
+                    
+                    // Update text fields
+                    teacherName.textContent = teacher.fullName;
+                    fullNameInput.value = teacher.fullName;
+                    genderSelect.value = teacher.gender || 'Male';
+                    countryInput.value = teacher.country || '';
+                    idNumberInput.value = teacher.idNumber || '';
+                    universityNameInput.value = teacher.universityName || '';
+                } else {
+                    alert('Failed to load profile: ' + (result.error || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error loading profile data');
+            }
+        }
+
+        // Handle profile image change
+        profileImageInput.addEventListener('change', async function(event) {
+            const file = event.target.files[0]; 
+            if (file) {
+                // Show preview
+                const reader = new FileReader(); 
+                reader.onload = function(e) {
+                    profileImage.src = e.target.result; 
+                };
+                reader.readAsDataURL(file);
+                
+                // Upload to server
+                const formData = new FormData();
+                formData.append('profileImage', file);
+                
+                try {
+                    const response = await fetch('upload_profile_image.php', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    const result = await response.json();
+                    if (!result.success) {
+                        alert('Failed to upload image: ' + (result.error || ''));
+                    }
+                } catch (error) {
+                    console.error('Upload error:', error);
+                }
+            }
+        });
+
+        // Handle save changes
+        saveBtn.addEventListener('click', async function() {
+            const profileData = {
+                fullName: fullNameInput.value.trim(),
+                gender: genderSelect.value,
+                country: countryInput.value.trim(),
+                idNumber: idNumberInput.value.trim(),
+                universityName: universityNameInput.value.trim()
+            };
+            
+            try {
+                const response = await fetch('update_teacher_profile.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(profileData)
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    alert('Profile updated successfully!');
+                } else {
+                    alert('Error updating profile: ' + (result.error || ''));
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error updating profile');
+            }
+        });
+
+        // Handle exit
+        exitBtn.addEventListener('click', function() {
+            window.location.href = 'teacher_dashboard.html';
+        });
+
+        // Initialize profile data
+        document.addEventListener('DOMContentLoaded', fetchTeacherProfile);
+    </script>
+</body>
+</html>

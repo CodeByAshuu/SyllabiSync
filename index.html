@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome Portal - SyllabiSync</title>
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+  <link rel="stylesheet" href="/src/output.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@heroicons/react/outline" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+            },
+            secondary: {
+              500: '#10b981',
+              600: '#059669',
+            }
+          },
+          animation: {
+            'fade-in-up': 'fadeInUp 0.5s ease-out',
+            'fade-in': 'fadeIn 0.5s ease-out',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-50 min-h-screen flex flex-col items-center justify-center p-4">
+
+  <div class="text-center mb-8 animate-fade-in-up">
+    <h1 class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-4">
+      SyllabiSync
+    </h1>
+    <p class="text-xl text-gray-600 max-w-2xl">
+      Your one-stop destination to explore, manage, and share university curricula across institutions.
+      <br>Empowering educators and students with seamless syllabus synchronization.
+    </p>
+  </div>
+
+  <div class="bg-white p-8 rounded-xl shadow-xl w-full max-w-md animate-fade-in-up transition-all duration-300 hover:shadow-2xl">
+    <div class="space-y-6">
+      <div class="text-center">
+        <h2 class="text-2xl font-bold text-gray-800">Get Started</h2>
+        <p class="text-gray-500">Select your role to continue</p>
+      </div>
+      
+      <div class="space-y-4">
+        <div>
+          <label for="userType" class="block text-sm font-medium text-gray-700 mb-1 text-left">I am a...</label>
+          <select id="userType" class="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200">
+            <option value="">-- Select your role --</option>
+            <option value="teacher">Teacher/Professor</option>
+            <option value="student">Student</option>
+            <option value="admin">Administrator</option>
+          </select>
+        </div>
+
+        <div class="flex flex-col space-y-3 pt-2">
+          <button onclick="redirectTo('login')" class="w-full bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-200 flex items-center justify-center space-x-2 shadow-md hover:shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            <span>Login to Your Account</span>
+          </button>
+          
+          <button onclick="redirectTo('signup')" class="w-full bg-secondary-500 hover:bg-secondary-600 text-white px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary-500 focus:ring-offset-2 transition-all duration-200 flex items-center justify-center space-x-2 shadow-md hover:shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6z" />
+            </svg>
+            <span>Create New Account</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-8 text-center text-gray-500 text-sm animate-fade-in">
+    <p>Join thousands of educators and students already using SyllabiSync</p>
+    <p class="mt-1">Simplified curriculum management • Cross-institution access • Always up-to-date</p>
+  </div>
+
+  <script>
+    function redirectTo(action) {
+      const role = document.getElementById('userType').value;
+      const selectElement = document.getElementById('userType');
+
+      if (!role) {
+        // Add shake animation to the select element
+        selectElement.classList.add('animate-shake');
+        setTimeout(() => {
+          selectElement.classList.remove('animate-shake');
+        }, 500);
+        
+        // Focus on the select element
+        selectElement.focus();
+        return;
+      }
+
+      if (action === 'login') {
+        if (role === 'teacher') {
+          window.location.href = 'teacher_login.html';
+        } else if (role === 'student') {
+          window.location.href = 'student_login.html';
+        } else if (role === 'admin') {
+          window.location.href = 'admin_login.html';
+        }
+      } else if (action === 'signup') {
+        if (role === 'teacher') {
+          window.location.href = 'teacher_signup.html';
+        } else if (role === 'student') {
+          window.location.href = 'student_signup.html';
+        } else {
+          alert("Admin accounts are created by system administrators only.");
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-5px); }
+      40%, 80% { transform: translateX(5px); }
+    }
+    .animate-shake {
+      animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+    }
+  </style>
+</body>
+</html>

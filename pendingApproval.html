@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pending Approvals</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 min-h-screen flex">
+  <!-- Sidebar Navigation -->
+  <div class="bg-blue-800 w-64 flex flex-col text-white p-6 fixed h-full">
+    <div class="flex items-center gap-3 border-b border-blue-600 pb-4">
+      <i class="fas fa-user-circle text-4xl text-blue-200"></i>
+      <div>
+        <p class="text-lg font-semibold">Admin Panel</p>
+        <p class="text-sm text-blue-200">Administrator</p>
+      </div>
+    </div>
+    <nav class="mt-6 space-y-2">
+      <a href="admin.php" class="flex items-center gap-3 p-3 hover:bg-blue-700 rounded-lg transition-all duration-200">
+        <i class="fas fa-home w-5 text-center"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="pendingApproval.php" class="flex items-center gap-3 p-3 bg-blue-700 rounded-lg">
+        <i class="fas fa-clock w-5 text-center"></i>
+        <span>Pending Approval</span>
+      </a>
+      <a href="approvedCurriculum.php" class="flex items-center gap-3 p-3 hover:bg-blue-700 rounded-lg transition-all duration-200">
+        <i class="fas fa-check-circle w-5 text-center"></i>
+        <span>Approved Curriculum</span>
+      </a>
+      <a href="userManagement.php" class="flex items-center gap-3 p-3 hover:bg-blue-700 rounded-lg transition-all duration-200">
+        <i class="fas fa-users w-5 text-center"></i>
+        <span>User Management</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 p-3 hover:bg-blue-700 rounded-lg transition-all duration-200 mt-8">
+        <i class="fas fa-sign-out-alt w-5 text-center"></i>
+        <span>Logout</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex-1 ml-64 p-8">
+    <!-- Navbar -->
+    <div class="bg-white shadow-md rounded-lg p-4 flex justify-between items-center mb-6">
+      <h1 class="text-xl font-semibold text-gray-800">
+        <i class="fas fa-clock text-blue-600 mr-2"></i>
+        Pending Approvals
+      </h1>
+      <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow transition duration-200 flex items-center gap-2">
+        <i class="fas fa-sign-out-alt"></i>
+        Logout
+      </button>
+    </div>
+
+    <!-- Archive Container -->
+    <div class="bg-white p-6 rounded-lg shadow-md">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl font-semibold text-gray-800">
+          <i class="fas fa-file-pdf text-red-500 mr-2"></i>
+          Pending Syllabus Approvals
+        </h2>
+        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+          <span id="pending-count">0</span> Pending
+        </span>
+      </div>
+
+      <!-- List of PDFs (Dynamically Added) -->
+      <div id="pdf-list" class="space-y-4">
+        <!-- Loading state -->
+        <div class="flex justify-center items-center py-8">
+          <div class="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Approval Modal -->
+    <div id="approval-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+      <div class="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+        <div class="flex items-center mb-4">
+          <i class="fas fa-check-circle text-green-500 text-2xl mr-2"></i>
+          <h3 class="text-lg font-semibold">Approve Syllabus</h3>
+        </div>
+        <form id="approval-form">
+          <input type="hidden" id="approval-file-name">
+          <div class="mb-4">
+            <label for="subject-name" class="block text-gray-700 mb-2 font-medium">Subject Name</label>
+            <input type="text" id="subject-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+          </div>
+          <div class="mb-4">
+            <label for="stream" class="block text-gray-700 mb-2 font-medium">Stream</label>
+            <input type="text" id="stream" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+          </div>
+          <div class="mb-4">
+            <label for="teacher-id" class="block text-gray-700 mb-2 font-medium">Teacher ID</label>
+            <input type="text" id="teacher-id" class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100" readonly>
+          </div>
+          <div class="mb-6">
+            <label for="university-name" class="block text-gray-700 mb-2 font-medium">University Name</label>
+            <input type="text" id="university-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100" readonly>
+          </div>
+          <div class="flex justify-end space-x-3">
+            <button type="button" id="cancel-approval" class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-lg transition duration-200">
+              Cancel
+            </button>
+            <button type="submit" class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition duration-200 flex items-center gap-2">
+              <i class="fas fa-check"></i>
+              Confirm Approval
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Rejection Modal -->
+    <div id="rejection-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+      <div class="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+        <div class="flex items-center mb-4">
+          <i class="fas fa-times-circle text-red-500 text-2xl mr-2"></i>
+          <h3 class="text-lg font-semibold">Reject Syllabus</h3>
+        </div>
+        <form id="rejection-form">
+          <input type="hidden" id="rejection-file-name">
+          <div class="mb-4">
+            <label for="feedback" class="block text-gray-700 mb-2 font-medium">Feedback (Reason for rejection)</label>
+            <textarea id="feedback" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" rows="4" required></textarea>
+          </div>
+          <div class="flex justify-end space-x-3">
+            <button type="button" id="cancel-rejection" class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-lg transition duration-200">
+              Cancel
+            </button>
+            <button type="submit" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition duration-200 flex items-center gap-2">
+              <i class="fas fa-times"></i>
+              Confirm Rejection
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Fetch and display pending PDFs
+    fetch('upload1.php')
+      .then(response => response.json())
+      .then(pdfFiles => {
+        const listContainer = document.getElementById('pdf-list');
+        const pendingCount = document.getElementById('pending-count');
+        
+        if (pdfFiles.length === 0) {
+          listContainer.innerHTML = `
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-8 text-center">
+              <i class="fas fa-check-circle text-blue-500 text-4xl mb-3"></i>
+              <h3 class="text-lg font-medium text-gray-800 mb-1">No pending approvals</h3>
+              <p class="text-gray-600">All syllabus files have been processed.</p>
+            </div>
+          `;
+          pendingCount.textContent = '0';
+          return;
+        }
+        
+        pendingCount.textContent = pdfFiles.length;
+        listContainer.innerHTML = '';
+        
+        pdfFiles.forEach(pdfFile => {
+          const pdfItem = document.createElement('div');
+          pdfItem.className = 'bg-gray-50 p-4 rounded-lg border border-gray-200 flex justify-between items-center hover:shadow-md transition duration-200';
+          
+          pdfItem.innerHTML = `
+            <div class="flex items-center gap-4">
+              <div class="bg-red-100 p-3 rounded-full">
+                <i class="fas fa-file-pdf text-red-500 text-xl"></i>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-800">${pdfFile}</h3>
+                <p class="text-sm text-gray-500">Status: <span class="text-yellow-600">Pending</span></p>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button class="action-btn bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-lg shadow transition duration-200" onclick="downloadPdf('${pdfFile}')">
+                <i class="fas fa-download"></i>
+              </button>
+              <button class="action-btn bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-lg shadow transition duration-200" onclick="showApprovalModal('${pdfFile}')">
+                <i class="fas fa-check"></i>
+              </button>
+              <button class="action-btn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg shadow transition duration-200" onclick="showRejectionModal('${pdfFile}')">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          `;
+          
+          listContainer.appendChild(pdfItem);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching PDF list:', error);
+        document.getElementById('pdf-list').innerHTML = `
+          <div class="bg-red-50 border border-red-200 rounded-lg p-8 text-center">
+            <i class="fas fa-exclamation-circle text-red-500 text-4xl mb-3"></i>
+            <h3 class="text-lg font-medium text-gray-800 mb-1">Error loading approvals</h3>
+            <p class="text-gray-600">Please try again later.</p>
+            <button onclick="window.location.reload()" class="mt-4 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition duration-200">
+              <i class="fas fa-sync-alt mr-2"></i> Refresh
+            </button>
+          </div>
+        `;
+      });
+
+    // Download PDF function
+    function downloadPdf(fileName) {
+      const downloadUrl = `uploads/${fileName}`;
+      window.location.href = downloadUrl;
+    }
+    
+    // Show approval modal (async version)
+    async function showApprovalModal(fileName) {
+      document.getElementById('approval-file-name').value = fileName;
+      
+      try {
+        // Fetch existing data from backend
+        const response = await fetch(`upload1.php?fileName=${encodeURIComponent(fileName)}`);
+        const data = await response.json();
+        
+        // Populate the form fields
+        document.getElementById('teacher-id').value = data.teacherId || '';
+        document.getElementById('university-name').value = data.universityName || '';
+        
+        // Show the modal
+        document.getElementById('approval-modal').classList.remove('hidden');
+      } catch (error) {
+        console.error('Error fetching file details:', error);
+        // Fallback - show modal with empty fields
+        document.getElementById('teacher-id').value = '';
+        document.getElementById('university-name').value = '';
+        document.getElementById('approval-modal').classList.remove('hidden');
+      }
+    }
+    
+    // Show rejection modal
+    function showRejectionModal(fileName) {
+      document.getElementById('rejection-file-name').value = fileName;
+      document.getElementById('rejection-modal').classList.remove('hidden');
+    }
+    
+    // Hide approval modal
+    document.getElementById('cancel-approval').addEventListener('click', () => {
+      document.getElementById('approval-modal').classList.add('hidden');
+    });
+    
+    // Hide rejection modal
+    document.getElementById('cancel-rejection').addEventListener('click', () => {
+      document.getElementById('rejection-modal').classList.add('hidden');
+    });
+    
+    // Handle approval form submission
+    document.getElementById('approval-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const formData = {
+        fileName: document.getElementById('approval-file-name').value,
+        action: 'approve',
+        subjectName: document.getElementById('subject-name').value,
+        stream: document.getElementById('stream').value,
+        teacherId: document.getElementById('teacher-id').value,
+        universityName: document.getElementById('university-name').value
+      };
+
+      fetch('upload1.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('Syllabus approved successfully!');
+          document.getElementById('approval-modal').classList.add('hidden');
+          document.getElementById('approval-form').reset();
+          // Refresh the list
+          window.location.reload();
+        } else {
+          alert('Error approving syllabus: ' + (data.error || 'Unknown error'));
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Error approving syllabus. Please try again.');
+      });
+    });
+    
+    // Handle rejection form submission
+    document.getElementById('rejection-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const formData = {
+        fileName: document.getElementById('rejection-file-name').value,
+        action: 'reject',
+        feedback: document.getElementById('feedback').value
+      };
+
+      fetch('upload1.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('Syllabus rejected successfully!');
+          document.getElementById('rejection-modal').classList.add('hidden');
+          document.getElementById('rejection-form').reset();
+          // Refresh the list
+          window.location.reload();
+        } else {
+          alert('Error rejecting syllabus: ' + (data.error || 'Unknown error'));
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Error rejecting syllabus. Please try again.');
+      });
+    });
+  </script>
+</body>
+</html>

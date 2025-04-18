@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preview Syllabus</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-blue-400 to-blue-500 min-h-screen flex flex-col items-center justify-center">
+
+  <!-- Navbar -->
+  <div id="navbar" class="w-full max-w-2xl bg-white shadow-lg rounded-lg p-4 flex justify-between items-center mb-6 mt-4">
+    <h1 class="text-lg font-semibold text-gray-700">Syllabus Preview</h1>
+
+    <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow-md">
+      
+      <a href="teacher_dashboard.html">Logout</a>
+    
+    </button>
+  </div>
+
+  <!-- Preview Container -->
+  <div class="w-full max-w-2xl bg-white p-6 rounded-lg shadow-xl">
+    
+    <div class="mb-4">
+      <label class="block text-gray-700 font-medium">Course Code</label>
+      <input id="preview-code" type="text" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500">
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700 font-medium">Course Title</label>
+      <input id="preview-title" type="text" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500">
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700 font-medium">Stream</label>
+      <input id="preview-stream" type="text" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500">
+    </div>
+
+    <div id="preview-units">
+      <!-- Units will be inserted here dynamically -->
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex gap-4 mt-4">
+      <button id="edit" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg shadow-md">Edit</button>
+      <button id="save" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg shadow-md">Save</button>
+      <button id="download" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md">Download PDF</button>
+      <button id="upload" class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg shadow-md">Submit</button>
+      <button id="draft" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg shadow-md">Save as Draft</button>
+    </div>
+
+  </div>
+
+  <script src="javascript/preview.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="javascript/pdf.js"></script>
+
+</body>
+</html>
