@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard - AICTE Curriculum Design</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .sidebar {
+            transition: all 0.3s ease;
+            height: 100vh;
+            position: fixed;
+            z-index: 20;
+            left: -256px;
+            width: 256px;
+        }
+        .sidebar.active {
+            left: 0;
+        }
+        .sidebar-collapsed {
+            width: 80px;
+        }
+        .sidebar-expanded {
+            width: 256px;
+        }
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+        .sidebar-overlay.active {
+            display: block;
+        }
+        .main-content {
+            transition: margin-left 0.3s ease;
+            min-height: 100vh;
+            background-color: #f3f4f6;
+        }
+        .nav-item-text {
+            transition: opacity 0.3s ease;
+        }
+        .sidebar-collapsed .nav-item-text {
+            opacity: 0;
+            width: 0;
+            overflow: hidden;
+        }
+        .sidebar-collapsed .logo-text {
+            opacity: 0;
+            width: 0;
+            overflow: hidden;
+        }
+        @media (min-width: 768px) {
+            .sidebar {
+                left: 0;
+            }
+            .main-content {
+                margin-left: 256px;
+            }
+            .sidebar-collapsed + .main-content {
+                margin-left: 80px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="sidebar-overlay"></div>
+
+    <div class="flex">
+        <div class="sidebar bg-blue-800 text-white sidebar-expanded">
+            <div class="p-4 flex justify-between items-center">
+                <div class="flex items-center">
+                    <i class="fas fa-graduation-cap text-2xl mr-3"></i>
+                    <span class="logo-text text-2xl font-bold">AICTE</span>
+                </div>
+                <button class="hidden md:block text-white sidebar-collapse-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </div>
+            <nav class="p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#" class="flex items-center p-2 bg-blue-700 rounded-lg">
+                            <i class="fas fa-tachometer-alt mr-3"></i>
+                            <span class="nav-item-text">Dashboard</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="syllabusAdder.html" class="flex items-center p-2 hover:bg-blue-700 rounded-lg">
+                            <i class="fas fa-pencil-ruler mr-3"></i>
+                            <span class="nav-item-text">Syllabus Designer</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="message.php" class="flex items-center p-2 hover:bg-blue-700 rounded-lg">
+                            <i class="fas fa-envelope mr-3"></i>
+                            <span class="nav-item-text">Messages</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="archive.html" class="flex items-center p-2 hover:bg-blue-700 rounded-lg">
+                            <i class="fas fa-archive mr-3"></i>
+                            <span class="nav-item-text">Archives</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.html" class="flex items-center p-2 hover:bg-blue-700 rounded-lg">
+                            <i class="fas fa-right-from-bracket mr-3"></i>
+
+                            <span class="nav-item-text">Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content flex-1 p-4 md:p-6">
+            <header class="flex justify-between items-center mb-4">
+                <button class="sidebar-toggle md:hidden">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                <h1 class="text-xl md:text-2xl font-bold text-gray-800">Teacher Dashboard</h1>
+                <div class="flex items-center space-x-3 md:space-x-4">
+                    <div class="relative">
+                        <i class="fas fa-bell text-gray-600 text-lg md:text-xl"></i>
+                        <span class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
+                    </div>
+                    <div class="flex items-center">
+                        <a href="profile.html" class="font-medium cursor-pointer text-sm md:text-base" id="profile-link">
+                            Dr. Smith
+                        </a>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-4 md:mb-6">
+                <div class="bg-white p-3 md:p-4 rounded-lg shadow">
+                    <div class="flex justify-between">
+                        <div>
+                            <p class="text-gray-500 text-xs md:text-sm">Active Courses</p>
+                            <h3 class="text-lg md:text-xl font-bold" id="active-courses">0</h3>
+                        </div>
+                        <div class="bg-blue-100 p-2 rounded-full">
+                            <i class="fas fa-book text-blue-600 text-sm md:text-base"></i>
+                        </div>
+                    </div>
+                    <p class="text-xs text-green-500 mt-1"><i class="fas fa-arrow-up mr-1"></i> <span id="active-change">0</span> from last term</p>
+                </div>
+
+                <div class="bg-white p-3 md:p-4 rounded-lg shadow">
+                    <div class="flex justify-between">
+                        <div>
+                            <p class="text-gray-500 text-xs md:text-sm">Pending Approvals</p>
+                            <h3 class="text-lg md:text-xl font-bold" id="pending-approvals">0</h3>
+                        </div>
+                        <div class="bg-yellow-100 p-2 rounded-full">
+                            <i class="fas fa-clock text-yellow-600 text-sm md:text-base"></i>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">Waiting for admin review</p>
+                </div>
+
+                <div class="bg-white p-3 md:p-4 rounded-lg shadow">
+                    <div class="flex justify-between">
+                        <div>
+                            <p class="text-gray-500 text-xs md:text-sm">Approved Syllabi</p>
+                            <h3 class="text-lg md:text-xl font-bold" id="approved-syllabi">0</h3>
+                        </div>
+                        <div class="bg-green-100 p-2 rounded-full">
+                            <i class="fas fa-check text-green-600 text-sm md:text-base"></i>
+                        </div>
+                    </div>
+                    <p class="text-xs text-green-500 mt-1"><i class="fas fa-arrow-up mr-1"></i> <span id="approved-change">0</span> this year</p>
+                </div>
+
+                <div class="bg-white p-3 md:p-4 rounded-lg shadow">
+                    <div class="flex justify-between">
+                        <div>
+                            <p class="text-gray-500 text-xs md:text-sm">Revisions Needed</p>
+                            <h3 class="text-lg md:text-xl font-bold" id="revisions-needed">0</h3>
+                        </div>
+                        <div class="bg-red-100 p-2 rounded-full">
+                            <i class="fas fa-exclamation text-red-600 text-sm md:text-base"></i>
+                        </div>
+                    </div>
+                    <p class="text-xs text-red-500 mt-1">Requires your attention</p>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                <!-- Recent Syllabi -->
+                <div class="bg-white p-4 rounded-lg shadow lg:col-span-2">
+                    <h2 class="text-lg font-bold mb-3">Recent Activites</h2>
+                    <div class="space-y-3" id="recent-syllabi-container">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+                <!-- Add this inside the Recent Syllabi div, after the syllabus list -->
+                
+                <!-- Quick Actions -->
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h2 class="text-lg font-bold mb-3">Quick Actions</h2>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button class="p-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 flex flex-col items-center syllabus-designer-btn">
+                            <i class="fas fa-pencil-ruler text-lg mb-1"></i>
+                            <span class="text-xs">Syllabus Designer</span>
+                        </button>
+                        <button class="p-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 flex flex-col items-center">
+                            <i class="fas fa-history text-lg mb-1"></i>
+                            <span class="text-xs">View History</span>
+                        </button>
+                        <button class="p-2 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 flex flex-col items-center">
+                            <i class="fas fa-download text-lg mb-1"></i>
+                            <span class="text-xs">Export PDF</span>
+                        </button>
+                        <button class="p-2 bg-orange-100 text-orange-700 rounded-lg hover:bg-orange-200 flex flex-col items-center">
+                            <i class="fas fa-question text-lg mb-1"></i>
+                            <span class="text-xs">Help</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="stats-visualization" class="mt-4 animate-fadeInUp" style="animation-delay: 0.6s">
+                <!-- Visualization will be inserted here by JavaScript -->
+                </div>
+        </div>
+    </div>
+
+    <script src="javascript/dashboard.js"></script>
+    <script src="javascript/dashboard2.js"></script>
+    <script src="javascript/stats-visualizer.js"></script>
+</body>
+</html>
