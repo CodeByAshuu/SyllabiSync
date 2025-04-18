@@ -3,7 +3,8 @@
     <title>About SyllabiSync</title>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
     <!-- <link rel="stylesheet" href="/assets/about.css"> -->
-    <link rel="stylesheet" href="/src/output.css">
+    <link rel="stylesheet" href="/SyllabiSync/src/output.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- AOS JS -->
@@ -137,7 +138,7 @@
     </nav>
 
     <!-- MAIN BANNER -->
-    <section id="page-header" class="about-header w-full h-[50vh] bg-cover flex justify-center text-center flex-col p-4 text-white bg-[url('/assets/image/banner/banner.png')] shadow-lg mt-20">
+    <section id="page-header" class="about-header w-full h-[50vh] bg-cover flex justify-center text-center flex-col p-4 text-white bg-[url('/SyllabiSync/assets/image/banner/banner.png')]  shadow-lg mt-20">
         <h2 class="font-bold text-5xl text-white text-shadow-md">#KnowUs</h2>
         <p class="text-white text-shadow-md">LET ME TELL YOU ABOUT OURSELVES</p>
     </section>

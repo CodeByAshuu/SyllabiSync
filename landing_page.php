@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/src/output.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <title>SyllabiSync</title>
@@ -50,8 +51,7 @@
             <div class="hidden md:flex justify-between space-x-8 gap-8 font-medium ">
                 <a href="landing_page.php" class="relative text-base text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Home</a>
                 <a href="about.php" class="relative text-base text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">About</a>
-                <a href="#" class="relative text-base text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Curriculum</a>
-                <a href="institute.php" class="relative text-base text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Institution</a>
+                <a href="Curriculum.php" class="relative text-base text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Curriculum</a>
                 <a href="contact.php" class="relative text-base text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Contact</a>
             </div>
         </div>
@@ -67,10 +67,9 @@
 
     <!-- Mobile Menu -->
     <div id="mobile-menu" class=" md:hidden flex flex-col items-center bg-white shadow-lg p-4 space-y-4">
-        <a href="#" class="text-lg text-gray-800 hover:text-blue-500">Home</a>
-        <a href="#" class="text-lg text-gray-800 hover:text-blue-500">About</a>
-        <a href="#" class="text-lg text-gray-800 hover:text-blue-500">Curriculum</a>
-        <a href="#" class="text-lg text-gray-800 hover:text-blue-500">Institution</a>
+        <a href="landing_page.php" class="text-lg text-gray-800 hover:text-blue-500">Home</a>
+        <a href="about.php" class="text-lg text-gray-800 hover:text-blue-500">About</a>
+        <a href="Curriculum.php" class="text-lg text-gray-800 hover:text-blue-500">Curriculum</a>
         <a href="contact.php" class="text-lg text-gray-800 hover:text-blue-500">Contact</a>
     </div>
 

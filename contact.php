@@ -97,6 +97,7 @@ if (isset($_SESSION['success_message'])) {
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
     <!-- <link rel="stylesheet" href="/assets/styles.css"> -->
     <link rel="stylesheet" href="/src/output.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -240,7 +241,7 @@ if (isset($_SESSION['success_message'])) {
         /* Contact */
 
         #page-header.contact-header{
-            background-image: url('/assets/image/banner/banner.png');
+            background-image: url('/SyllabiSync/assets/image/banner/banner.png');
         }
 
         #contact-details{
@@ -359,7 +360,7 @@ if (isset($_SESSION['success_message'])) {
             justify-content: space-between;
             flex-wrap: wrap;
             align-items: center;
-            background-image: url('/assets/image/banner/b14.png');
+            background-image: url('/src/pro/assets/image/banner/b14.png');
             background-repeat: no-repeat;
             background-position: 20% 30%;
             background-color: #000501;
@@ -424,8 +425,7 @@ if (isset($_SESSION['success_message'])) {
             <div class="hidden md:flex justify-between space-x-9 gap-18 font-semibold ">
                 <a href="landing_page.php" class="relative text-sm text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Home</a>
                 <a href="about.php" class="relative text-sm text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">About</a>
-                <a href="#" class="relative text-sm text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Curriculum</a>
-                <a href="institute.php" class="relative text-sm text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Institution</a>
+                <a href="Curriculum.php" class="relative text-sm text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Curriculum</a>
                 <a href="contact.php" class="relative text-sm text-gray-800 hover:text-blue-500 after:block after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">Contact</a>
             </div>
         </div>
@@ -433,7 +433,7 @@ if (isset($_SESSION['success_message'])) {
 
 
     <!-- MAIN BANNER -->
-    <div id="page-header" class="w-full h-[50vh] bg-cover flex justify-center text-center flex-col p-4 text-white bg-[url('/assets/image/banner/banner.png')] shadow-lg mt-20">
+    <div id="page-header" class="w-full h-[50vh] bg-cover flex justify-center text-center flex-col p-4 text-white bg-[url('/SyllabiSync/assets/image/banner/banner.png')] shadow-lg mt-20">
         <h2 class="text-white text-shadow-md text-5xl font-bold mb-4">#let's_talk</h2>
         <p class="text-white text-shadow-md">LEAVE A MESSAGE, WE LOVE TO HEAR FROM YOU!</p>
     </div>

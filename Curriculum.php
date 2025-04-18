@@ -62,7 +62,6 @@ $subject_options = mysqli_query($conn, "SELECT DISTINCT subject_name FROM syllab
             <a href="landing_page.php" class="text-lg text-gray-800 hover:text-blue-500">Home</a>
             <a href="about.php" class="text-lg text-gray-800 hover:text-blue-500">About</a>
             <a href="studentInterface.php" class="text-lg text-gray-800 hover:text-blue-500">Curriculum</a>
-            <a href="institute.php" class="text-lg text-gray-800 hover:text-blue-500">Institution</a>
             <a href="contact.php" class="text-lg text-gray-800 hover:text-blue-500">Contact</a>
         </div>
     </nav>
