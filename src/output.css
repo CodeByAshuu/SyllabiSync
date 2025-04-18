@@ -620,6 +620,9 @@
   .z-50 {
     z-index: 50;
   }
+  .z-\[��h�\13 �\8 \{r�1Gk\] {
+    z-index: ��h��{r 1Gk;
+  }
   .z-auto {
     z-index: auto;
   }
@@ -745,6 +748,9 @@
   }
   .m-2 {
     margin: calc(var(--spacing) * 2);
+  }
+  .m-4 {
+    margin: calc(var(--spacing) * 4);
   }
   .mx-4 {
     margin-inline: calc(var(--spacing) * 4);
@@ -2263,6 +2269,9 @@
   }
   .p-8 {
     padding: calc(var(--spacing) * 8);
+  }
+  .p-9 {
+    padding: calc(var(--spacing) * 9);
   }
   .p-12 {
     padding: calc(var(--spacing) * 12);
