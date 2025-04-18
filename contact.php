@@ -95,7 +95,7 @@ if (isset($_SESSION['success_message'])) {
 <title>Contact</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
-    <link rel="stylesheet" href="/assets/styles.css">
+    <!-- <link rel="stylesheet" href="/assets/styles.css"> -->
     <link rel="stylesheet" href="/src/output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <!-- AOS CSS -->
@@ -112,6 +112,302 @@ if (isset($_SESSION['success_message'])) {
             });
         });
     </script>
+    <style>
+        /* styles.css */
+        @import url("https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Spartan', sans-serif;
+        }
+
+        /* h1{
+            font-size: 50px;
+            line-height: 64px;
+            color: #222;
+        }
+
+        h2{
+            font-size: 46px;
+            line-height: 54px;
+            color: #222;
+        }
+
+        h4{
+            font-size: 20px;
+            color: #222;
+        }
+
+        h6{
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        p{
+            font-size: 16px;
+            color: #465b52;
+            margin:15px 0 20px 0;
+        } */
+        .section-p1{
+            padding:40px 80px;
+        }
+        .section-m1{
+            margin:40px 0;
+        }
+
+        button.normal{
+            font-size: 14px;
+            padding: 15px 30px;
+            color: #000;
+            background-color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            transition: 0.2s ease;
+        }
+
+
+        /* Footer */
+        footer {
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+            padding: 40px 60px 40px 70px;
+            margin: 0 auto;
+            line-height: 2rem;
+        }
+
+        #footer-inner{
+            padding-bottom: 40px;
+        }
+
+
+        footer h4{
+            color: #fff;
+            padding-bottom: 10px;
+            font-size:1rem;
+            line-height: 1.75/1.125;
+        }
+
+        .special{
+            padding-top: 30px ;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        /* ABOUT */
+
+        /* who are we */
+        #about-head{
+            display: flex;
+            align-items: center;
+        }
+
+        #about-head img{
+            width: 50%;
+            height: auto;
+        }
+
+        #about-head div{
+            padding-left: 40px;
+        }
+
+        #about-head p{
+            padding:20px 0 20px 0;
+        }
+
+        /* about app */
+        #about-app{
+            text-align: center;
+        }
+
+        #about-app .video{
+            width: 70%;
+            height: 100%;
+            margin: 30px auto 0 auto;
+        }
+
+        #about-app .video video{
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+        }
+
+
+        /* Contact */
+
+        #page-header.contact-header{
+            background-image: url('/assets/image/banner/banner.png');
+        }
+
+        #contact-details{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #contact-details .details{
+            width: 40%;
+        }
+
+        #contact-details .details .span,
+        #form-details form span{
+            font-size: 12px;
+        }
+
+        #contact-details .details h2,
+        #form-details form h2{
+            font-size: 26px;
+            line-height: 35px;
+            padding: 20px 0;
+        }
+
+        #contact-details .details h3{
+            font-size: 16px;
+            padding-bottom: 15px;
+        }
+
+        #contact-details .details li{
+            list-style: none;
+            display: flex;
+            padding: 10px 0;
+        }
+
+        #contact-details .details li i{
+            font-size: 14px;
+            padding-right: 22px;
+        }
+
+        #contact-details .details li p{
+            font-size: 14px;
+            margin: 0;
+        }
+
+        #contact-details .map{
+            width: 55%;
+            height: 400px;
+        }
+
+        #contact-details .map iframe{
+            width: 100%;
+            height: 100%;
+        }
+
+        #form-details{
+            display: flex;
+            justify-content: space-between;
+            margin: 30px;
+            padding: 80px;
+            border: 1px solid #e1e1e1;
+        }
+
+        #form-details form{
+            width: 65%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        #form-details form input,
+        #form-details form textarea{
+            width: 100%;
+            padding: 12px 15px;
+            outline: none;
+            margin-bottom: 20px;
+            border: 1px solid #e1e1e1;
+        }
+
+        #form-details form button{
+            padding: 15px 32px;
+            background-color: #1E88E5;
+            color: #fff;
+            border-radius: 4px;
+        }
+
+        #form-details .people div{
+            padding-bottom: 25px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        #form-details .people div img{
+            width: 65px;
+            height: 65px;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        #form-details .people div p{
+            margin: 0;
+            font-size: 13px;
+            line-height: 25px;
+        }
+
+        #form-details .people div p span{
+            display: block;
+            font-size: 16px;
+            font-weight: 600;
+            color: #000;
+        }
+
+        /* Newsletter */
+        #newsletter{
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: center;
+            background-image: url('/assets/image/banner/b14.png');
+            background-repeat: no-repeat;
+            background-position: 20% 30%;
+            background-color: #000501;
+            padding: 60px 40px;
+            margin: 0px;
+        }
+
+        #newsletter h4{
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        #newsletter p{
+            font-size: 14px;
+            font-weight: 600;
+            color: #818ea0;
+        }
+
+        #newsletter p span{
+            color: #ffbd27;
+        }
+
+        #newsletter .form{
+            display: flex;
+            width: 40%;
+        }
+        #newsletter input{
+            height: 3.125rem;
+            padding: 0 1.25rem;
+            font-size: 14px;
+            width: 100%;
+            border: 1px solid transparent ;
+            border-radius: 4px;
+            outline: none;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            background-color: #fff;
+        }
+
+        #newsletter button{
+            background-color: #1E88E5;
+            color: #fff;
+            white-space: nowrap;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    </style>
 </head>
 <body class="font-[Poppins] flex flex-col min-h-screen">
 

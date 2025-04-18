@@ -2,7 +2,7 @@
 <head>
     <title>About SyllabiSync</title>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
-    <link rel="stylesheet" href="/assets/about.css">
+    <!-- <link rel="stylesheet" href="/assets/about.css"> -->
     <link rel="stylesheet" href="/src/output.css">
     <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -16,7 +16,103 @@
                 offset: 100
             });
         });
+        
     </script>
+    <style>
+        /* ABOUT */
+
+        /* who are we */
+        #about-head{
+            display: flex;
+            align-items: center;
+        }
+
+        #about-head img{
+            width: 50%;
+            height: auto;
+        }
+
+        #about-head div{
+            padding-left: 40px;
+        }
+
+        #about-head p{
+            padding:20px 0 20px 0;
+        }
+
+        /* about app */
+        #about-app{
+            text-align: center;
+        }
+
+        #about-app .video{
+            width: 70%;
+            height: 100%;
+            margin: 30px auto 0 auto;
+        }
+
+        #about-app .video video{
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+        }
+
+
+        /* Newsletter */
+        #newsletter{
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: center;
+            background-image: url('/assets/image/banner/b14.png');
+            background-repeat: no-repeat;
+            background-position: 20% 30%;
+            background-color: #000501;
+            padding: 60px 40px;
+            margin: 0px;
+        }
+
+        #newsletter h4{
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        #newsletter p{
+            font-size: 14px;
+            font-weight: 600;
+            color: #818ea0;
+        }
+
+        #newsletter p span{
+            color: #ffbd27;
+        }
+
+        #newsletter .form{
+            display: flex;
+            width: 40%;
+        }
+        #newsletter input{
+            height: 3.125rem;
+            padding: 0 1.25rem;
+            font-size: 14px;
+            width: 100%;
+            border: 1px solid transparent ;
+            border-radius: 4px;
+            outline: none;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            background-color: #fff;
+        }
+
+        #newsletter button{
+            background-color: #1E88E5;
+            color: #fff;
+            white-space: nowrap;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -85,14 +181,10 @@
                     </a>
 
                     <!-- 4th Account -->
-                    <img src="/mnt/data/c0067f22-ee84-4cbd-b3e6-a733a6625682.png" alt="Account 4" class="w-12 h-12 rounded-full border-2 border-white" />
-
-                    <!-- Placeholder 5th -->
-                    <img src="https://i.pinimg.com/564x/3b/b1/d0/3bb1d0e89e68f982a08f6fa452d82c69.jpg" alt="Avatar" class="w-12 h-12 rounded-full border-2 border-white" />
-
-                    <!-- Placeholder 6th -->
-                    <img src="https://i.pinimg.com/564x/e4/86/0e/e4860ec019b39640cf6262897bb8b347.jpg" alt="Avatar" class="w-12 h-12 rounded-full border-2 border-white" />
-
+                    <a href="https://github.com/RI991" target="_blank">
+                    <img src="https://avatars.githubusercontent.com/u/150167549?v=4" alt="Account 4" class="w-12 h-12 rounded-full border-2 border-white" />
+                    </a>
+                    
                     <!-- +99 Circle -->
                     <div class="w-12 h-12 flex items-center justify-center rounded-full bg-black text-white text-sm font-semibold border-2 border-white">
                         +99
