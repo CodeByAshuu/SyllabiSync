@@ -2,19 +2,22 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "frontend_backend";
+$database = "curriculum_admin";
 
 $conn = mysqli_connect($servername, $username, $password, $database);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id"])) {
-    $id = $_POST["id"];
-    $updateQuery = "UPDATE syllabus_approvals SET status='Approved', admin_feedback='', processed_at=NOW() WHERE id=$id";
-    mysqli_query($conn, $updateQuery);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $id = $_POST['id'];
+    $admin_name = $_POST['admin_name'];
+
+    $query = "UPDATE course_curriculums SET status = 'Approved', admin_name = '$admin_name', updated_at = NOW() WHERE id = $id";
+    mysqli_query($conn, $query);
 }
 
 mysqli_close($conn);
-header("Location: pendingApproval.php");
+header("Location: /pendingApproval.html");
 exit;
+?>

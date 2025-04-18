@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login</title>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link rel="stylesheet" href="/src/output.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h2 class="text-2xl font-bold mb-6 text-center">Admin Login</h2>
+
+        <form action="admin_login.php" method="POST" class="space-y-4">
+            <div>
+                <label for="admin_id" class="block text-sm font-medium text-gray-700">Admin ID</label>
+                <input type="text" id="admin_id" name="admin_id" required 
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+            </div>
+
+            <div>
+                <label for="admin_password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" id="admin_password" name="admin_password" required 
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+            </div>
+
+            <div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">
+                    Login
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
